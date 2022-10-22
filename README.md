@@ -1,2 +1,2 @@
-# awsFaceSwap
-My attempt at creating Face Swap of two images using Delaunay Triangulation
+# CS549-FaceSwap
+Project 2 of CS549

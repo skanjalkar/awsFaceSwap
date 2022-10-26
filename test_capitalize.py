@@ -1,3 +1,6 @@
+import cv2
+import numpy as np
+
 def capital_case(x):
     return x.capitalize()
 

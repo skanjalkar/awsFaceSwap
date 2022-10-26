@@ -247,9 +247,3 @@ def helper(target, source):
     # cv2.imshow('faceswap', swapedClone)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-
-
-# img1 = cv2.imread('/home/enryu/github_stuff/Computer Vision/CS549-P2/CS549-FaceSwap/Output/result1.jpg')
-# img2 = cv2.imread('/home/enryu/github_stuff/Computer Vision/CS549-P2/CS549-FaceSwap/Output/result2.jpg')
-# print(img1, img2)
-# helper(img1, img2)

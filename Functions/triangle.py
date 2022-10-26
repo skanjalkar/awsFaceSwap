@@ -1,10 +1,7 @@
-from email.mime import image
-from sys import warnoptions
 import cv2
 import imutils
 import scipy
 import numpy as np
-import pry
 
 def convexhull(img, landmarks):
     img_ = img.copy()

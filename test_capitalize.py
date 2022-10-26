@@ -1,13 +1,14 @@
-import cv2
-import numpy as np
 from Functions import landmarks
 from Functions import triangle
+
 
 def capital_case(x):
     return x.capitalize()
 
+
 def test_capital_case():
     assert capital_case('semaphore') == 'Semaphore'
+
 
 def test_wrapper():
     image_paths, images = landmarks.landmark(True)

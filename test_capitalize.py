@@ -11,7 +11,7 @@ def test_capital_case():
 
 
 def test_wrapper():
-    image_paths, images = landmarks.landmark(False, "/home/ubuntu/awsFaceSwap/Images/face1.jpg", "/home/ubuntu/awsFaceSwap/Images/face2.jpg")
+    image_paths, images = landmarks.landmark(False, "Images/face1.jpg", "Images/face2.jpg")
     triangle.helper(images[0], images[1], "img1", "img2.jpg", "./")
     # print(
     #     "Finished Test"

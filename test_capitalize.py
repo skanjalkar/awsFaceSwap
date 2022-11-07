@@ -11,8 +11,8 @@ def test_capital_case():
 
 
 def test_wrapper():
-    image_paths, images = landmarks.landmark(True)
-    triangle.helper(images[0], images[1])
-    print(
-        "Finished Test"
-    )
+    image_paths, images = landmarks.landmark(False, "Images/face1.jpg", "Images/face2.jpg", "shape_predictor_68_face_landmarks.dat", "")
+    triangle.helper(images[0], images[1], "img1", "img2.jpg", "./", True)
+    # print(
+    #     "Finished Test"
+    # )

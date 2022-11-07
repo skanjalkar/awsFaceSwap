@@ -42,10 +42,9 @@ def storeLandmarks(faceLandmarks, fileName):
     f.close()
 
 
-def landmark(plot, image1_path, image2_path):
+def landmark(plot, image1_path, image2_path, path="/home/ubuntu/awsFaceSwap/shape_predictor_68_face_landmarks.dat"):
     # with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
     #     f.writelines("Landmarks before dlib\n")
-    path = "/home/ubuntu/awsFaceSwap/shape_predictor_68_face_landmarks.dat"
     face_detector = dlib.get_frontal_face_detector()
     landmark_detector = dlib.shape_predictor(path)
     images_dict = {1: image1_path, 2: image2_path}

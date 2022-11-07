@@ -94,12 +94,18 @@ def triangulation(img_, points):
     return img, trinagleList, triangle2_list
 
 
-def points(index):
+def points(index, test):
     pts = []
-    with open(f"/home/ubuntu/awsFaceSwap/Output/image{index}.txt") as f:
-        for line in f:
-            y, x = line.split(", ")
-            pts.append((int(x), int(y)))
+    if test:
+        with open(f"Output/image{index}.txt") as f:
+            for line in f:
+                y, x = line.split(", ")
+                pts.append((int(x), int(y)))
+    else:
+        with open(f"/home/ubuntu/awsFaceSwap/Output/image{index}.txt") as f:
+            for line in f:
+                y, x = line.split(", ")
+                pts.append((int(x), int(y)))
     return pts
 
 def boundingBox(p1, p2, p3):
@@ -195,15 +201,15 @@ def swapFace(image, source, sourcepts, sourcetl, target, targetpts, targettl):
     return img, warpedImgS
 
 
-def helper(target, source, title1, title2, write_path='/home/ubuntu/awsWebsite/myapp/public/images/awsOutput/'):
+def helper(target, source, title1, title2, write_path='/home/ubuntu/awsWebsite/myapp/public/images/awsOutput/', isTest=False):
     '''
     target = Face to be swapped on
     source = Face being swapped
     '''
     img = target.copy()
     # main function to form delaunay triangulation
-    lm1 = points(1)
-    lm2 = points(2)
+    lm1 = points(1, isTest)
+    lm2 = points(2, isTest)
 
     xD, yD, wD, hD = cv2.boundingRect(np.asarray(lm1))
     imgFace1 = target[yD:yD+hD, xD:xD+wD]

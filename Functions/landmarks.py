@@ -43,24 +43,24 @@ def storeLandmarks(faceLandmarks, fileName):
 
 
 def landmark(plot, image1_path, image2_path):
-    with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
-        f.writelines("Landmarks before dlib\n")
+    # with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
+    #     f.writelines("Landmarks before dlib\n")
     path = "/home/ubuntu/awsFaceSwap/shape_predictor_68_face_landmarks.dat"
     face_detector = dlib.get_frontal_face_detector()
     landmark_detector = dlib.shape_predictor(path)
     images_dict = {1: image1_path, 2: image2_path}
     image_paths = []
     images  = []
-    with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
-        f.writelines("Landmarks starting\n")
+    # with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
+        # f.writelines("Landmarks starting\n")
     for index in range(1, 3):
         image = images_dict[index]
         img = cv2.imread(image)
         img = imutils.resize(img, width=320)
         img_ = img.copy()
         images.append(img_)
-        with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
-            f.writelines("Image read\n")
+        # with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
+        #     f.writelines("Image read\n")
         # cv2.imshow("Original Image", img)
         # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
@@ -88,8 +88,8 @@ def landmark(plot, image1_path, image2_path):
 
 
             storeLandmarks(detected, fileName)
-        with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
-            f.writelines("Landmarks done")
+        # with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
+        #     f.writelines("Landmarks done")
 
         opimg = f'/home/ubuntu/awsFaceSwap/Output/result{index}.jpg'
         image_paths.append(opimg)

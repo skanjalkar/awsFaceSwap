@@ -228,8 +228,8 @@ def helper(target, source, title1, title2, write_path='/home/ubuntu/awsWebsite/m
         pt3 = lm2[p3_id][0]
         tl2.append([pt1[0], pt1[1], pt2[0], pt2[1], pt3[0], pt3[1]])
     # print(len(tl2))
-    with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
-        f.writelines("Triangulation done")
+    # with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
+    #     f.writelines("Triangulation done")
     source_copy = source.copy()
     tFace2 = drawTriangle(source_copy, tl2, lm2, True)
 
@@ -242,8 +242,8 @@ def helper(target, source, title1, title2, write_path='/home/ubuntu/awsWebsite/m
     ptsOutsideFace1, mask1, face1Center = outsidePts(target, lm1)
     swap[ptsOutsideFace1[:, 1], ptsOutsideFace1[:, 0]] = img[ptsOutsideFace1[:, 1], ptsOutsideFace1[:, 0]]
     warpedImg[ptsOutsideFace1[:, 1], ptsOutsideFace1[:, 0]] = 0
-    with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
-        f.writelines("Swapping...")
+    # with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
+    #     f.writelines("Swapping...")
     swapedClone = cv2.seamlessClone(np.uint8(swap), img, mask1, face1Center, cv2.MIXED_CLONE)
     random_inte = np.random.randint(0,5000)
     # print(f"{write_path}{title1}{random_inte}{title2}")

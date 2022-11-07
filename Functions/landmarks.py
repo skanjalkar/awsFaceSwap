@@ -42,18 +42,25 @@ def storeLandmarks(faceLandmarks, fileName):
     f.close()
 
 
-def landmark(plot=True):
-    path = "shape_predictor_68_face_landmarks.dat"
+def landmark(plot, image1_path, image2_path):
+    with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
+        f.writelines("Landmarks before dlib\n")
+    path = "/home/ubuntu/awsFaceSwap/shape_predictor_68_face_landmarks.dat"
     face_detector = dlib.get_frontal_face_detector()
     landmark_detector = dlib.shape_predictor(path)
+    images_dict = {1: image1_path, 2: image2_path}
     image_paths = []
     images  = []
+    with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
+        f.writelines("Landmarks starting\n")
     for index in range(1, 3):
-        image = f'Images/face{index}.jpg'
+        image = images_dict[index]
         img = cv2.imread(image)
         img = imutils.resize(img, width=320)
         img_ = img.copy()
         images.append(img_)
+        with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
+            f.writelines("Image read\n")
         # cv2.imshow("Original Image", img)
         # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
@@ -72,15 +79,19 @@ def landmark(plot=True):
             # print(faceRect)
             cv2.rectangle(img, (int(rect.left()), int(rect.top())), (int(rect.right()), int(rect.bottom())), (0, 0, 255), 2)
             detected = landmark_detector(img, faceRect)
-            if k == 0:
-                print("Total number of face landmarks detected ",len(detected.parts()))
+            # if k == 0:
+                # print("Total number of face landmarks detected ",len(detected.parts()))
             allLandmarks.append(detected)
             facePoints(img, detected)
-            fileName = faceLandmarkOp + f"{index}.txt"
-            print(f'Landmark is saved into {fileName}')
+            fileName = "/home/ubuntu/awsFaceSwap/Output/image" + f"{index}.txt"
+            # print(f'Landmark is saved into {fileName}')
+
 
             storeLandmarks(detected, fileName)
-        opimg = f'Output/result{index}.jpg'
+        with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
+            f.writelines("Landmarks done")
+
+        opimg = f'/home/ubuntu/awsFaceSwap/Output/result{index}.jpg'
         image_paths.append(opimg)
         cv2.imwrite(opimg, img)
         # if plot:

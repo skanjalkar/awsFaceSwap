@@ -96,7 +96,7 @@ def triangulation(img_, points):
 
 def points(index):
     pts = []
-    with open(f"Output/image{index}.txt") as f:
+    with open(f"/home/ubuntu/awsFaceSwap/Output/image{index}.txt") as f:
         for line in f:
             y, x = line.split(", ")
             pts.append((int(x), int(y)))
@@ -195,7 +195,7 @@ def swapFace(image, source, sourcepts, sourcetl, target, targetpts, targettl):
     return img, warpedImgS
 
 
-def helper(target, source):
+def helper(target, source, title1, title2, write_path='/home/ubuntu/awsWebsite/myapp/public/images/awsOutput/'):
     '''
     target = Face to be swapped on
     source = Face being swapped
@@ -212,9 +212,10 @@ def helper(target, source):
     xS, yS, wS, hS = cv2.boundingRect(np.asarray(lm2))
     imgFace2 = source[yS:yS+hS, xS:xS+wS]
     # cv2.imshow('face2', imgFace2)
-    # cv2.waitKey(0)
+    # cv2.waitKey(0)swappedClone.jpg
+
     if len(lm1) == 0 or len(lm2) == 0:
-        print(f'No face found')
+        # print(f'No face found')
         return None
     img1, tl1, tl2_list = triangulation(target, lm1)
     lm2 = np.array(lm2)
@@ -227,6 +228,8 @@ def helper(target, source):
         pt3 = lm2[p3_id][0]
         tl2.append([pt1[0], pt1[1], pt2[0], pt2[1], pt3[0], pt3[1]])
     # print(len(tl2))
+    with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
+        f.writelines("Triangulation done")
     source_copy = source.copy()
     tFace2 = drawTriangle(source_copy, tl2, lm2, True)
 
@@ -239,8 +242,13 @@ def helper(target, source):
     ptsOutsideFace1, mask1, face1Center = outsidePts(target, lm1)
     swap[ptsOutsideFace1[:, 1], ptsOutsideFace1[:, 0]] = img[ptsOutsideFace1[:, 1], ptsOutsideFace1[:, 0]]
     warpedImg[ptsOutsideFace1[:, 1], ptsOutsideFace1[:, 0]] = 0
+    with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
+        f.writelines("Swapping...")
     swapedClone = cv2.seamlessClone(np.uint8(swap), img, mask1, face1Center, cv2.MIXED_CLONE)
-    cv2.imwrite("SwappedImage.jpg", swapedClone)
+    random_inte = np.random.randint(0,5000)
+    # print(f"{write_path}{title1}{random_inte}{title2}")
+    cv2.imwrite(f"{write_path}{title1}{random_inte}{title2}", swapedClone)
     # cv2.imshow('faceswap', swapedClone)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+    print(f"images/awsOutput/{title1}{random_inte}{title2}", end="")

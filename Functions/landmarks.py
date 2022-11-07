@@ -42,7 +42,7 @@ def storeLandmarks(faceLandmarks, fileName):
     f.close()
 
 
-def landmark(plot, image1_path, image2_path, path="/home/ubuntu/awsFaceSwap/shape_predictor_68_face_landmarks.dat"):
+def landmark(plot, image1_path, image2_path, path="/home/ubuntu/awsFaceSwap/shape_predictor_68_face_landmarks.dat", op_path="/home/ubuntu/awsFaceSwap/"):
     # with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
     #     f.writelines("Landmarks before dlib\n")
     face_detector = dlib.get_frontal_face_detector()
@@ -82,7 +82,7 @@ def landmark(plot, image1_path, image2_path, path="/home/ubuntu/awsFaceSwap/shap
                 # print("Total number of face landmarks detected ",len(detected.parts()))
             allLandmarks.append(detected)
             facePoints(img, detected)
-            fileName = "/home/ubuntu/awsFaceSwap/Output/image" + f"{index}.txt"
+            fileName = op_path + "Output/image" + f"{index}.txt"
             # print(f'Landmark is saved into {fileName}')
 
 
@@ -90,7 +90,7 @@ def landmark(plot, image1_path, image2_path, path="/home/ubuntu/awsFaceSwap/shap
         # with open("/home/ubuntu/awsFaceSwap/log.log", "a") as f:
         #     f.writelines("Landmarks done")
 
-        opimg = f'/home/ubuntu/awsFaceSwap/Output/result{index}.jpg'
+        opimg = op_path + f'Output/result{index}.jpg'
         image_paths.append(opimg)
         cv2.imwrite(opimg, img)
         # if plot:
